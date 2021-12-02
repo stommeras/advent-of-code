@@ -9,4 +9,4 @@ for i in range(1, len(nums)):
         sum += 1
 
 print(sum)
-# 1687
+# 1687, apparently wrong (too low) ...
