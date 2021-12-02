@@ -1,4 +1,4 @@
-### Part one
+### Part One
 
 with open("day1-input.txt") as f:
     input = f.read().splitlines()
@@ -19,7 +19,7 @@ print(increases_depth)
 # 1688
 
 
-### Part two
+### Part Two
 
 depth_windows = []
 
