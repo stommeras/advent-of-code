@@ -5,7 +5,7 @@ with open("day1-input.txt") as f:
 
 depths = [int(n) for n in input]
 
-# check for each element of list if it's bigger than the previous element, and adds to num
+# check for each element of list if it's bigger than the previous element, returns number of increases
 def check_increases(list):
     sum = 0
     for i in range(1, len(list)):
@@ -23,7 +23,7 @@ print(increases_depth)
 
 depth_windows = []
 
-# check if 3 numbers left, adds the next three together and adds to new list
+# check if 3 numbers left, adds the next three together and appends to new list
 for i in range(0, len(depths)):
     if (i + 2) == (len(depths)):
         break
@@ -33,3 +33,4 @@ for i in range(0, len(depths)):
 increases_depth_windows = check_increases(depth_windows)
 
 print(increases_depth_windows)
+# 1728
