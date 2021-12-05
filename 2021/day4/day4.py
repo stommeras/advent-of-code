@@ -24,7 +24,7 @@ for line in input:
     all_drawn.append([0] * 25)
 
 def check_win(drawn):
-    for i in range(0, 20, 5):
+    for i in range(0, 25, 5):
         if 0 not in {drawn[0 + i], drawn[1 + i], drawn[2 + i], drawn[3 + i], drawn[4 + i]}:
             return True
     for j in range(5):
@@ -93,9 +93,6 @@ for number in draw_numbers:
 
     if last_board != None:
         break
-
-print(last_board)
-print(last_drawn)
 
 last_score = 0
 
