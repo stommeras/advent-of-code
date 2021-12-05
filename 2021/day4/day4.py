@@ -2,50 +2,108 @@
 
 from tabulate import tabulate
 
-with open("day4-example.txt") as f:
+with open("day4-input.txt") as f:
     input = f.read().split("\n\n")
 
 draw_numbers = input.pop(0).split(",")
 
+for i in range(len(draw_numbers)):
+    draw_numbers[i] = int(draw_numbers[i])
+
 boards = []
-marked = []
+all_drawn = []     # drawn numbers on each board
 
 for line in input:
-    board = []
-    rows = line.split("\n")
-    for row in rows:
-        row = row.split()
-        row = [int(i) for i in row]
-        board.append(row)
+    board = line.replace("\n", " ")
+    board = board.split()
 
-    marked.append([[False] * 5] * 5)
+    for i in range(len(board)):
+        board[i] = int(board[i])
 
-def check_win(board, mark):
-    for row, mark_row in zip(board, mark):
-        if False not in mark_row:
-            return board
-    for i in range(len(board[0])):
-        if False not in {board[0][i], board[1][i], board[2][i], board[3][i], board[4][i]}:
-            return board
-    return None
+    boards.append(board)
+    all_drawn.append([0] * 25)
+
+def check_win(drawn):
+    for i in range(0, 20, 5):
+        if 0 not in {drawn[0 + i], drawn[1 + i], drawn[2 + i], drawn[3 + i], drawn[4 + i]}:
+            return True
+    for j in range(5):
+        if 0 not in {drawn[0 + j], drawn[5 + j], drawn[10 + j], drawn[15 + j], drawn[20 + j]}:
+            return True
 
 def play_number(number):
-    for i, board in enumerate(boards):
-        for j, row in enumerate(board):
-            for k in range(len(row)):
-                if row[k] == number:
-                    marked[i][j][k] = True
+    for board, drawn in zip(boards, all_drawn):
+        for i in range(len(board)):
+            if board[i] == number:
+                drawn[i] = 1        
 
 winning_board = None
+winning_mark = None
+winning_number = None
 
 for number in draw_numbers:
     play_number(number)
-    print(number)
-    
-    for board, mark in zip(boards, marked):
-        winning_board = (board, mark)
+
+    for i, drawn in enumerate(all_drawn):
+        if check_win(drawn):
+            winning_board = boards[i]
+            winning_drawn = all_drawn[i]
+            winning_number = number
+            break
 
     if winning_board != None:
         break
 
-print(winning_board)
+winning_score = 0
+
+for number, drawn in zip(winning_board, winning_drawn):
+    if drawn == 0:
+        winning_score += number
+
+winning_score = winning_score * winning_number
+
+print("---Part One---")
+print("Final score of the winning board:", winning_score)
+
+
+### Part Two
+
+all_drawn = []
+
+for board in boards:
+    all_drawn.append([0] * 25)
+
+last_board = None
+last_drawn = None
+last_number = None
+
+for number in draw_numbers:
+    play_number(number)
+
+    for i, (board, drawn) in enumerate(zip(boards, all_drawn)):
+        if check_win(drawn):
+            if len(boards) == 1:
+                last_board = board
+                last_drawn = drawn
+                last_number = number
+                break
+            else:
+                boards.remove(board)
+                all_drawn.remove(drawn)
+
+    if last_board != None:
+        break
+
+print(last_board)
+print(last_drawn)
+
+last_score = 0
+
+for number, drawn in zip(last_board, last_drawn):
+    if drawn == 0:
+        last_score += number
+
+last_score = last_score * last_number
+
+print("\n---Part Two---")
+print("Final score of the losing board:", last_score)
