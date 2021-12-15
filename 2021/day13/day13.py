@@ -1,10 +1,10 @@
 import numpy as np
 from parse import findall
 
-with open("day13-input.txt") as f:
+with open("day13-example.txt") as f:
     input = f.read().strip()
 
-coords = findall('{:d},{:d}', input)
+coords = findall("{:d},{:d}", input)
 folds = findall("{:l}={:d}", input)
 
 P = np.zeros((9999, 9999), bool)
