@@ -18,6 +18,9 @@ for line in input:
 
 print(fully_contains)
 
+
+### Part Two
+
 partly_contains = 0
 
 for line in input:
