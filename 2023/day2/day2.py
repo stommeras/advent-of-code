@@ -1,6 +1,4 @@
-### Part One
 import sys
-import re
 
 with open(sys.argv[1], "r") as f:
     input = f.read().split("\n")

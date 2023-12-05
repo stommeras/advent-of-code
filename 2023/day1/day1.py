@@ -1,4 +1,3 @@
-### Part One
 import sys
 import re
 
