@@ -5,11 +5,7 @@ with open(sys.argv[1], "r") as f:
 
 # Part 1
 
-max = {
-    "red": 12,
-    "green": 13,
-    "blue": 14
-}
+max = {"red": 12, "green": 13, "blue": 14}
 
 sum_of_ids = 0
 
@@ -43,11 +39,7 @@ for line in input:
     identifier = int(game_id.split(" ")[1])
     sets = game.split("; ")
 
-    highest = {
-        "red": 0,
-        "green": 0,
-        "blue": 0
-    }
+    highest = {"red": 0, "green": 0, "blue": 0}
 
     for set in sets:
         pulls = set.split(", ")

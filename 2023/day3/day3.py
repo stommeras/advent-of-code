@@ -5,18 +5,27 @@ with open(sys.argv[1], "r") as f:
 
 # Part 1
 
+
 def find_whole_number(row, column):
     left_boundary = column
     while left_boundary > 0 and input_copy[row][left_boundary - 1].isdigit():
         left_boundary -= 1
 
     right_boundary = column
-    while right_boundary < len(input_copy[row]) - 1 and input_copy[row][right_boundary + 1].isdigit():
+    while (
+        right_boundary < len(input_copy[row]) - 1
+        and input_copy[row][right_boundary + 1].isdigit()
+    ):
         right_boundary += 1
 
-    whole_number = input_copy[row][left_boundary:right_boundary + 1]
-    input_copy[row] = input_copy[row][:left_boundary] + "." * len(whole_number) + input_copy[row][right_boundary + 1:]
+    whole_number = input_copy[row][left_boundary : right_boundary + 1]
+    input_copy[row] = (
+        input_copy[row][:left_boundary]
+        + "." * len(whole_number)
+        + input_copy[row][right_boundary + 1 :]
+    )
     return whole_number
+
 
 sum1 = 0
 
@@ -24,11 +33,16 @@ input_copy = input.copy()
 
 for row, line in enumerate(input_copy):
     for column, char in enumerate(line):
-        if not(char.isdigit() or char == "."):
+        if not (char.isdigit() or char == "."):
             adjacent_positions = [
-                (row - 1, column - 1), (row - 1, column), (row - 1, column + 1),
-                (row, column - 1),                        (row, column + 1),
-                (row + 1, column - 1), (row + 1, column), (row + 1, column + 1)
+                (row - 1, column - 1),
+                (row - 1, column),
+                (row - 1, column + 1),
+                (row, column - 1),
+                (row, column + 1),
+                (row + 1, column - 1),
+                (row + 1, column),
+                (row + 1, column + 1),
             ]
 
             for r, c in adjacent_positions:
@@ -52,9 +66,14 @@ for row, line in enumerate(input_copy):
             input_copy = input.copy()
 
             adjacent_positions = [
-                (row - 1, column - 1), (row - 1, column), (row - 1, column + 1),
-                (row, column - 1),                        (row, column + 1),
-                (row + 1, column - 1), (row + 1, column), (row + 1, column + 1)
+                (row - 1, column - 1),
+                (row - 1, column),
+                (row - 1, column + 1),
+                (row, column - 1),
+                (row, column + 1),
+                (row + 1, column - 1),
+                (row + 1, column),
+                (row + 1, column + 1),
             ]
 
             part_numbers = []

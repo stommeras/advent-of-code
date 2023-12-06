@@ -5,6 +5,7 @@ with open(sys.argv[1], "r") as f:
 
 # Part 1
 
+
 def part_1(input):
     seeds = [int(seed) for seed in input[0].split(": ")[1].split()]
 
@@ -16,13 +17,15 @@ def part_1(input):
     temperature_to_humidity = []
     humidity_to_location = []
 
-    mappings = ["seed_to_soil",
-                "soil_to_fertilizer",
-                "fertilizer_to_water",
-                "water_to_light",
-                "light_to_temperature",
-                "temperature_to_humidity",
-                "humidity_to_location"]
+    mappings = [
+        "seed_to_soil",
+        "soil_to_fertilizer",
+        "fertilizer_to_water",
+        "water_to_light",
+        "light_to_temperature",
+        "temperature_to_humidity",
+        "humidity_to_location",
+    ]
 
     for section in input:
         if section.startswith("seeds:"):
@@ -32,11 +35,12 @@ def part_1(input):
         mapping = section[0].split()[0].replace("-", "_")
         data = section[1:]
 
-
         for line in data:
             dest_range_start, src_range_start, length = line.split()
 
-            eval(mapping).append([int(src_range_start), int(dest_range_start), int(length)])
+            eval(mapping).append(
+                [int(src_range_start), int(dest_range_start), int(length)]
+            )
 
     seed_locations = []
 
@@ -55,10 +59,12 @@ def part_1(input):
 
     return min(seed_locations)
 
+
 print(part_1(input))
 
 
 # Part 2
+
 
 def part_2(input):
     seeds = [int(seed) for seed in input[0].split(": ")[1].split()]
@@ -66,9 +72,8 @@ def part_2(input):
 
     i = 0
     while i < len(seeds):
-        seed_ranges.append([seeds[i], seeds[i+1]])
+        seed_ranges.append([seeds[i], seeds[i + 1]])
         i += 2
-
 
     seed_to_soil = []
     soil_to_fertilizer = []
@@ -78,13 +83,15 @@ def part_2(input):
     temperature_to_humidity = []
     humidity_to_location = []
 
-    mappings = ["seed_to_soil",
-                "soil_to_fertilizer",
-                "fertilizer_to_water",
-                "water_to_light",
-                "light_to_temperature",
-                "temperature_to_humidity",
-                "humidity_to_location"]
+    mappings = [
+        "seed_to_soil",
+        "soil_to_fertilizer",
+        "fertilizer_to_water",
+        "water_to_light",
+        "light_to_temperature",
+        "temperature_to_humidity",
+        "humidity_to_location",
+    ]
 
     for section in input:
         if section.startswith("seeds:"):
@@ -94,11 +101,12 @@ def part_2(input):
         mapping = section[0].split()[0].replace("-", "_")
         data = section[1:]
 
-
         for line in data:
             dest_range_start, src_range_start, length = line.split()
 
-            eval(mapping).append([int(src_range_start), int(dest_range_start), int(length)])
+            eval(mapping).append(
+                [int(src_range_start), int(dest_range_start), int(length)]
+            )
 
     seed_locations = []
 
@@ -116,3 +124,5 @@ def part_2(input):
         seed_locations.append(current)
 
     return min(seed_locations)
+
+print(part_2(input))

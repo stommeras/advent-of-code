@@ -26,7 +26,7 @@ print(sum1)
 number_of_cards = {}
 
 for i in range(len(input)):
-    number_of_cards[i+1] = 1
+    number_of_cards[i + 1] = 1
 
 for line in input:
     game, cards = line.split(": ")
